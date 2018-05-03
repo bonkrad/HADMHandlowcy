@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>HADMHandlowcy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand h1" href="#">HADMHandlowcy</a>
+    <div class="row mx-3">
+        <form class="form-inline m-2 my-lg-0" th:action="@{/raport}" method="get">
+            <input type="submit" value="Raport" class="form-control my-2 my-sm-0"/>
+        </form>
+        <form class="form-inline m-2 my-lg-0" th:action="@{/logout}" method="post">
+            <input type="submit" value="Wyloguj" class="form-control my-2 my-sm-0"/>
+        </form>
+    </div>
+</nav>
+<div class="container m-1">
+    <div class="row mb-1">
+        <h2 th:inline="text" th:text="${User}"></h2>
+    </div>
+    <div class="row mb-1">
+        <button type="button" class="btn m-1 functionButton" id="newClient">Nowy klient</button>
+        <button type="button" class="btn m-1 functionButton" id="oldClient">Własny klient</button>
+        <br/>
+        <button type="button" class="btn m-1 functionButton" id="callCenter">Call Center</button>
+        <button type="button" class="btn m-1 functionButton" id="dras">DRAS</button>
+        <button type="button" class="btn m-1 functionButton" id="orders">Zamówienia</button>
+        <button type="button" class="btn m-1 functionButton" id="delivery">Wydania</button>
+    </div>
+    <div id="newClientFrom" class="from">
+        <h5>Skąd klient</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1 clientFromButton" id="newClientSalon">Salon</button>
+            <button type="button" class="btn m-1 clientFromButton" id="newClientService">Serwis</button>
+            <button type="button" class="btn m-1 clientFromButton" id="newClientTelephone">Telefon</button>
+            <button type="button" class="btn m-1 clientFromButton" id="newClientMail">Mail</button>
+        </div>
+    </div>
+    <div id="oldClientFrom" class="from">
+        <h5>Skąd klient</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1 clientFromButton" id="oldClientMeeting">Spotkanie</button>
+            <button type="button" class="btn m-1 clientFromButton" id="oldClientTelephone">Telefon</button>
+            <button type="button" class="btn m-1 clientFromButton" id="oldClientMail">Mail</button>
+        </div>
+    </div>
+    <!--Nowy klient salon-->
+    <form class="hideable" id="newClientSalonForm" method="post" action="/newClientSalon">
+        <h5>Czy przedstawiono ofertę</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="quotation" required="required"/>
+        </div>
+
+        <h5>Czy zaproponowano odkup auta</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="carRepurchase" required="required"/>
+        </div>
+
+        <h5>Czy zaproponowano finansowanie</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="finance" required="required"/>
+        </div>
+
+        <h5>Czy wykonany pełen standard TK</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="standard" required="required"/>
+        </div>
+
+        <h5>Poziom zainteresowania</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1 btn-danger" value=0>Czerwony</button>
+            <button type="button" class="btn m-1 btn-warning" value=1>Zółty</button>
+            <button type="button" class="btn m-1 btn-success" value=2>Zielony</button>
+            <input type="text" name="interest" required="required"/>
+        </div>
+        <button type="button" class="submit btn my-3">Dalej</button>
+    </form>
+    <!--Nowy klient serwis-->
+    <form class="hideable" id="newClientServiceForm" method="post" action="/newClientService">
+        <h5>Czy przedstawiono ofertę</h5>
+        <div class="row mb-1">
+
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="quotation" required="required"/>
+        </div>
+
+        <h5>Czy zaproponowano odkup auta</h5>
+        <div class="row mb-1">
+
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="carRepurchase" required="required"/>
+        </div>
+
+        <h5>Czy zaproponowano finansowanie</h5>
+        <div class="row mb-1">
+
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="finance" required="required"/>
+        </div>
+
+        <h5>Czy wykonany pełen standard TK</h5>
+        <div class="row mb-1">
+
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="standard" required="required"/>
+        </div>
+
+        <h5>Poziom zainteresowania</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1 btn-danger" value=0>Czerwony</button>
+            <button type="button" class="btn m-1 btn-warning" value=1>Zółty</button>
+            <button type="button" class="btn m-1 btn-success" value=2>Zielony</button>
+            <input type="text" name="interest" required="required"/>
+        </div>
+        <button type="button" class="submit btn my-3">Dalej</button>
+    </form>
+    <!--Nowy klient telefon-->
+    <form class="hideable" id="newClientTelephoneForm" method="post" action="/newClientTelephone">
+        <h5>Czy przedstawiono ofertę</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="quotation" required="required"/>
+        </div>
+
+        <h5>Czy umówiono spotkanie</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="meeting" required="required"/>
+        </div>
+
+        <h5>Czy wykonany pełen standard TK</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="standard" required="required"/>
+        </div>
+
+        <h5>Poziom zainteresowania</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1 btn-danger" value=0>Czerwony</button>
+            <button type="button" class="btn m-1 btn-warning" value=1>Zółty</button>
+            <button type="button" class="btn m-1 btn-success" value=2>Zielony</button>
+            <input type="text" name="interest" required="required"/>
+        </div>
+        <button type="button" class="submit btn my-3">Dalej</button>
+    </form>
+    <!--Nowy klient mail-->
+    <form class="hideable" id="newClientMailForm" method="post" action="/newClientMail">
+        <h5>Czy wykonano odpowiedź w ciągu 4 godzin</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="response" required="required"/>
+        </div>
+
+        <h5>Czy wykonany pełen standard TK</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1" value=1>Tak</button>
+            <button type="button" class="btn m-1" value=0>Nie</button>
+            <input type="text" name="standard" required="required"/>
+        </div>
+
+        <h5>Poziom zainteresowania</h5>
+        <div class="row mb-1">
+            <button type="button" class="btn m-1 btn-danger" value=0>Czerwony</button>
+            <button type="button" class="btn m-1 btn-warning" value=1>Zółty</button>
+            <button type="button" class="btn m-1 btn-success" value=2>Zielony</button>
+            <input type="text" name="interest" required="required"/>
+        </div>
+        <button type="button" class="submit btn my-3">Dalej</button>
+    </form>
+    <!--Własny klient spotkanie-->
+    <form class="hideable" id="oldClientMeetingForm" method="post" action="/oldClientMeeting">
+        <button type="submit" class="btn my-3">Zapisz</button>
+    </form>
+    <!--Własny klient telefon-->
+    <form class="hideable" id="oldClientTelephoneForm" method="post" action="/oldClientTelephone">
+        <button type="submit" class="btn my-3">Zapisz</button>
+    </form>
+    <!--Własny klient mail-->
+    <form class="hideable" id="oldClientMailForm" method="post" action="/oldClientMail">
+        <button type="submit" class="btn my-3">Zapisz</button>
+    </form>
+    <!--Call Center-->
+    <form class="hideable" id="callCenterForm" method="post" action="/callCenter">
+        <input type="text" name="quantity" class="form-control misc" required="required"/>
+        <button id="misc" type="submit" class="btn my-3">Zapisz</button>
+    </form>
+    <!--DRAS-->
+    <form class="hideable" id="drasForm" method="post" action="/dras">
+        <input type="text" name="quantity" class="form-control misc" required="required"/>
+        <button id="misc" type="submit" class="btn my-3">Zapisz</button>
+    </form>
+    <!--Zamówienia-->
+    <form class="hideable" id="ordersForm" method="post" action="/orders">
+        <input type="text" name="quantity" class="form-control misc" required="required"/>
+        <button id="misc" type="submit" class="btn my-3">Zapisz</button>
+    </form>
+    <!--Wydania-->
+    <form class="hideable" id="deliveryForm" method="post" action="/delivery">
+        <input type="text" name="quantity" class="form-control misc" required="required"/>
+        <button id="misc" type="submit" class="btn my-3">Zapisz</button>
+    </form>
+
+    <div class="row m-2">
+
+    </div>
+</div>
+<div id="fromSample">
+    <div id="overlay">
+        <div class="container">
+            <button type="button" class="btn m-1" value=1><img src="/img/google_icon.png" class="icon"/><br />Google</button>
+            <button type="button" class="btn m-1" value=2><img src="/img/facebook_icon.png" class="icon"/><br />Facebook</button>
+            <button type="button" class="btn m-1" value=3><img src="/img/web_icon.png" class="icon"/><br />Lokalny portal</button>
+            </br>
+            <button type="button" class="btn m-1" value=4><img src="/img/banner_icon.png" class="icon"/><br />Baner</button>
+            <button type="button" class="btn m-1" value=5><img src="/img/stand_icon.png" class="icon"/><br />Stoisko</button>
+            <button type="button" class="btn m-1" value=6><img src="/img/radio_icon.png" class="icon"/><br />Radio</button>
+            </br>
+            <button type="button" class="btn m-1" value=7><img src="/img/driveby_icon.png" class="icon"/><br />Przejazdem</button>
+            <button type="button" class="btn m-1" value=8><img src="/img/friend_icon.png" class="icon"/><br />Z polecenia</button>
+            <button type="button" class="btn m-1" value=9><img src="/img/other_icon.png" class="icon"/><br />Inne</button>
+            </br>
+            <input type="text" name="marketing" required="required"/>
+            <div>
+                <button type="sumbit" class="submit btn my-3" data-toggle="popover" data-placement="bottom"
+                        data-content="Zaznacz wszystkie potrzebne opcje">Zapisz
+                </button>
+                <button type="button" id="cancelButton" class="cancel btn my-3">Anuluj</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+
+</body>

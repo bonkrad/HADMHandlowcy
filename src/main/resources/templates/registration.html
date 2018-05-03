@@ -6,33 +6,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 
+
 </head>
 <body>
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand h1" href="#">HADMHandlowcy</a>
 </nav>
 <div class="container">
-    <form th:action="@{/login}" method="post" class="">
+    <form th:action="@{/registration}" method="post">
         <div class="row">
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <h3 class="form-heading text-center m-2">Zaloguj</h3>
-                <div th:if="${param.logout}">
-                    <h6 class="text-center m-2">Wylogowano pomyślnie!</h6>
-                </div>
+                <h3 class="form-heading text-center m-2">Stwórz konto</h3>
 
-                <input type="text" class="form-control m-2" name="username" placeholder="Nazwa Użytkownika"
+                <input type="text" class="form-control m-2" name="name" placeholder="Imię"
                        autofocus="autofocus" required="required"/>
+
+                <input type="text" class="form-control m-2" name="surname" placeholder="Nazwisko" required="required"/>
+
+                <input type="text" class="form-control m-2" name="username" placeholder="Nazwa Użytkownika" required="required"/>
 
                 <input type="password" class="form-control m-2" name="password" placeholder="Hasło" required="required"/>
 
-                <input type="submit" class="btn btn-block m-2" value="Zaloguj"/>
+                <input type="password" class="form-control m-2" name="passwordConfirm" placeholder="Powtórz hasło" required="required"/>
 
-                <div th:if="${param.error}">
-                    <h6 class="text-center m-2">Niewłaściwa nazwa użytkownika lub hasło</h6>
+                <input type="submit" class="btn btn-block m-2" value="Zarejestruj"/>
+                <div th:if="${param.errorUser}">
+                    <h6 class="text-center m-2">Ta nazwa użytkownika jest już zajęta</h6>
                 </div>
-                <h4 class="text-center m-2"><a href="/registration">Stwórz konto</a></h4>
+                <div th:if="${param.errorPass}">
+                    <h6 class="text-center m-2">Hasła nie pokrywają się</h6>
+                </div>
+                <h4 class="text-center m-2"><a href="/login">Zaloguj</a></h4>
+
             </div>
             <div class="col-md-4">
             </div>

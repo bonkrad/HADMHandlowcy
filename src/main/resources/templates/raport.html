@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>HADMHandlowcy</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand h1" href="#">HADMHandlowcy</a>
+    <div class="row mx-3">
+        <form class="form-inline m-2 my-lg-0" th:action="@{/}" method="get">
+            <input type="submit" value="Ankieta" class="form-control my-2 my-sm-0"/>
+        </form>
+        <form class="form-inline m-2 my-lg-0" th:action="@{/logout}" method="post">
+            <input type="submit" value="Wyloguj" class="form-control my-2 my-sm-0"/>
+        </form>
+    </div>
+</nav>
+<div class="container">
+    <form th:action="@{/weekReport}" method="post" class="">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <h3 class="form-heading text-center m-2">Wygeneruj raport</h3>
+                <div class="form-group">
+                    <label for="weeklyReportYear">Rok</label>
+                    <select class="custom-select m-2" name="year" id="weeklyReportYear">
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="weeklyReportWeek">Tydzień</label>
+                    <select class="custom-select m-2" name="week" id="weeklyReportWeek">
+                        <option th:each="i : ${#numbers.sequence(1,53,1)}" th:value="${i}"> <p th:text="${ i }"></p></option>
+                    </select>
+                </div>
+
+                <input type="submit" class="btn btn-block m-2" value="Generuj raport tygodniowy"/>
+
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </form>
+    <form th:action="@{/monthReport}" method="post" class="">
+        <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <h3 class="form-heading text-center m-2">Wygeneruj raport</h3>
+
+                <div class="form-group">
+                    <label for="monthlyReportYear">Rok</label>
+                    <select class="custom-select m-2" name="year" id="monthlyReportYear">
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="monthlyReportMonth">Miesiąc</label>
+                    <select class="custom-select m-2" name="month" id="monthlyReportMonth">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="11">12</option>
+                    </select>
+                </div>
+
+                <input type="submit" class="btn btn-block m-2" value="Generuj raport miesięczny"/>
+
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </form>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</body>
+</html>
