@@ -26,8 +26,7 @@ public class UserServiceImpl implements UserService {
             throw new Exception("UserExist");
         } else if(!user.getPasswordConfirm().equals(user.getPassword())){
             throw new Exception("PasswordError");
-        }
-            else {
+        } else {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRoles(new HashSet<>(roleRepository.findAll()));
             userRepository.save(user);
